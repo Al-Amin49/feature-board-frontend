@@ -3,6 +3,7 @@ import OpenLayout from "../components/layout/OpenLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
+import NotFound from "../common/NotFound";
 
 
 export const router= createBrowserRouter([
@@ -24,5 +25,9 @@ export const router= createBrowserRouter([
                 element:<Signup></Signup>
             },
         ]
-    }
+    },
+    {
+        path: "*",
+        element: <NotFound />,
+      },
 ])
