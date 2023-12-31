@@ -1,9 +1,11 @@
 
 
 const Header = () => {
+    //bg-[#2ecc71]
     return (
-        <div>
-           <div className="navbar bg-[#2ecc71] text-white" >
+        <div> 
+
+           <div className="navbar bg-green-400 " >
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

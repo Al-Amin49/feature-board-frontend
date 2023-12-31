@@ -1,9 +1,10 @@
+import TabContent from "../../components/TabContent/TabContent";
 
 
 const Home = () => {
     return (
         <div>
-            <h3>this is home</h3>
+           <TabContent></TabContent>
         </div>
     );
 };
