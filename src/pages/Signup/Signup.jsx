@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import signUpImg from "../../assets/img/login.png";
 import { useForm } from "react-hook-form";
+import { axiosOpen } from "../../utils/axios";
 const Signup = () => {
   const {
     register,
@@ -9,8 +10,15 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     console.log(data);
+    try{
+        const response=await axiosOpen.post('api/v1/users/register', data)
+        console.log('res...', response.data.email)
+    }
+    catch(error){
+        console.log(error)
+    }
   };
   return (
     <>
