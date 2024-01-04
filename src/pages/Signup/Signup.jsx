@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import signUpImg from "../../assets/img/login.png";
 import { useForm } from "react-hook-form";
 import { axiosOpen } from "../../utils/axios";
+import { toast } from "react-toastify";
 const Signup = () => {
   const {
     register,
@@ -14,7 +15,20 @@ const Signup = () => {
     console.log(data);
     try{
         const response=await axiosOpen.post('api/v1/users/register', data)
-        console.log('res...', response.data.email)
+            if(response.data){
+                console.log(response.data)
+                reset()
+                toast.success('Register Successfully', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            }
     }
     catch(error){
         console.log(error)
