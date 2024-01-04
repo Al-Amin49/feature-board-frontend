@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import signUpImg from '../../assets/img/login.png';
 const Signup = () => {
+    
   return (
     <>
     <div className="hero bg-secondary">
