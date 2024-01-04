@@ -27,6 +27,7 @@ const Login = () => {
           <button className="btn btn-primary text-white w-1/2 mx-auto">Login</button>
         </div>
       </form>
+      {/*  eslint-disable-next-line react/no-unescaped-entities */}
       <p className='font-medium text-center py-2'>Don't Have a account. Creat an account <Link to="/signup"><span className='text-orange-700'>Signup</span></Link></p>
     </div>
   </div>

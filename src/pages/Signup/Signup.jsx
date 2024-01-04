@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signUpImg from "../../assets/img/login.png";
 import { useForm } from "react-hook-form";
-import { axiosOpen } from "../../utils/axios";
 import { toast } from "react-toastify";
+import { signUpUser } from "../../api/User";
 const Signup = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -11,27 +12,31 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async(data) => {
-    console.log(data);
-    try{
-        const response=await axiosOpen.post('api/v1/users/register', data)
-            if(response.data){
-                console.log(response.data)
-                reset()
-                toast.success('Register Successfully', {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    });
-            }
-    }
-    catch(error){
-        console.log(error)
+  const onSubmit = async (data) => {
+    const userData = {
+      username: data.username,
+      email: data.email,
+      password: data.password,
+    };
+    try {
+      const response = await signUpUser(userData);
+      if (response && response.data) {
+        reset();
+        navigate("/");
+        toast.success("Register Successfully", {
+          position: "top-center",
+        });
+      }
+      else {
+        // Handle unexpected response structure
+        toast.error("Unexpected response from server", {
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      toast.error('Error during registration', {
+        position: "top-center",
+      });
     }
   };
   return (
@@ -71,7 +76,7 @@ const Signup = () => {
                   })}
                   className="input input-bordered"
                 />
-                {errors.email?.type==='required' && (
+                {errors.email?.type === "required" && (
                   <span className="text-red-600">Email is required</span>
                 )}
               </div>
@@ -84,20 +89,24 @@ const Signup = () => {
                   type="password"
                   placeholder="password"
                   {...register("password", {
-                     required: true, 
-                     minLength: 6 ,
-                     pattern:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/
-                    })}
+                    required: true,
+                    minLength: 6,
+                    pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                  })}
                   className="input input-bordered"
                 />
-                {errors.password?.type==='required' && (
+                {errors.password?.type === "required" && (
                   <span className="text-red-600">Password is required</span>
                 )}
-                {errors.password?.type==='minLength' && (
-                  <span className="text-red-600">Password must be at least 6 characters</span>
+                {errors.password?.type === "minLength" && (
+                  <span className="text-red-600">
+                    Password must be at least 6 characters
+                  </span>
                 )}
-                {errors.password?.type==='pattern' && (
-                  <span className="text-red-600">Password must be including one digit and one number</span>
+                {errors.password?.type === "pattern" && (
+                  <span className="text-red-600">
+                    Password must be including one digit and one number
+                  </span>
                 )}
               </div>
               <div className="form-control mt-2 ">
