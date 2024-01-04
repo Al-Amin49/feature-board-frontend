@@ -28,11 +28,13 @@ const Signup = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("username")}
+                  {...register("username", { required: true, minLength: 4 })}
                   placeholder="username"
                   className="input input-bordered"
-                  required
                 />
+                {errors.username && (
+                  <span className="text-red-600">Name is required</span>
+                )}
               </div>
               {/* Email Field */}
               <div className="form-control">
@@ -42,10 +44,14 @@ const Signup = () => {
                 <input
                   type="email"
                   placeholder="email"
-                  {...register("email")}
+                  {...register("email", {
+                    required: true,
+                  })}
                   className="input input-bordered"
-                  required
                 />
+                {errors.email?.type==='required' && (
+                  <span className="text-red-600">Email is required</span>
+                )}
               </div>
               {/* Password field */}
               <div className="form-control">
@@ -55,10 +61,22 @@ const Signup = () => {
                 <input
                   type="password"
                   placeholder="password"
-                  {...register("password")}
+                  {...register("password", {
+                     required: true, 
+                     minLength: 6 ,
+                     pattern:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/
+                    })}
                   className="input input-bordered"
-                  required
                 />
+                {errors.password?.type==='required' && (
+                  <span className="text-red-600">Password is required</span>
+                )}
+                {errors.password?.type==='minLength' && (
+                  <span className="text-red-600">Password must be at least 6 characters</span>
+                )}
+                {errors.password?.type==='pattern' && (
+                  <span className="text-red-600">Password must be including one digit and one number</span>
+                )}
               </div>
               <div className="form-control mt-2 ">
                 <button className="btn btn-primary text-white w-1/2 mx-auto">
