@@ -57,12 +57,12 @@ const TabContent = () => {
       })
   return (
     <div>
-        <div className='w-100 p-10 py-16 bg-green-200'>
+        <div className='w-100 p-10 py-16 bg-secondary'>
             <h2 className='text-2xl  font-bold'>Feedback</h2>
         </div>
        <div className="w-full max-w-md px-2 -mt-12 sm:px-0">
       <Tab.Group>
-        <Tab.List className="flex space-x-1 rounded-xl bg-green-400 p-1">
+        <Tab.List className="flex space-x-1 rounded-xl bg-primary p-1">
           {Object.keys(categories).map((category) => (
             <Tab
               key={category}
