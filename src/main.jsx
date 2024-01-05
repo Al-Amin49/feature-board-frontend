@@ -5,13 +5,14 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/Router.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { QueryClient, QueryClientProvider } from "react-query";
-const queryClient = new QueryClient();
+import { UserProvider } from "./context/UserProvider.jsx";
+
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
+      <UserProvider>
       <ToastContainer />
       <RouterProvider router={router}></RouterProvider>
-    </QueryClientProvider>
+      </UserProvider>
   </React.StrictMode>
 );

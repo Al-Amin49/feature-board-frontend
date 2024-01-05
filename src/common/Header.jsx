@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/UserProvider";
 
 const Header = () => {
-  let user = false;
+  const {user}= useAuth()
+  console.log('user', user.email)
 
   const profile = (
     <>
@@ -16,13 +18,10 @@ const Header = () => {
       </div>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-28">
         <li>
-          <a className="justify-between">Profile</a>
+          <Link to="/profile" className="justify-between">Profile</Link>
         </li>
         <li>
-          <a>Settings</a>
-        </li>
-        <li>
-          <a>Logout</a>
+          <Link>Logout</Link>
         </li>
       </ul>
             </div>
