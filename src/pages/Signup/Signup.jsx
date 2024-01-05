@@ -3,18 +3,17 @@ import signUpImg from "../../assets/img/login.png";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { signUpUser } from "../../api/User";
-import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
+import { useAuth } from "../../context/UserProvider";
 const Signup = () => {
+  const {setUser, loading, setLoading}= useAuth()
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors }
   } = useForm();
-
-  const [loading, setLoading]=useState(false)
 
   const onSubmit = async (data) => {
     const userData = {
@@ -26,6 +25,7 @@ const Signup = () => {
       setLoading(true)
       const response = await signUpUser(userData);
       if (response && response.data) {
+        setUser(response.data)
         reset();
         navigate("/");
         toast.success("Register Successfully", {

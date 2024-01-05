@@ -5,22 +5,36 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
+  //fetch user Data
+  const fetchUserData = async () => {
+    try {
+      setLoading(true)
+      const currentUser = await userDetails();
+      setUser(currentUser.data.userData);
+    } catch (error) {
+      console.log("error", error);
+    }finally {
+      setLoading(false);
+    }
+  };
+  const logOut = () => {
+    setUser(null)
+    localStorage.removeItem('token');
+  };
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const currentUser = await userDetails();
-        console.log('current user', currentUser.data.userData.email)
-        setUser(currentUser.data.userData);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
     fetchUserData();
+    logOut();
   }, []);
+
+ 
   const authInfo = {
     user,
     setUser,
+    logOut,
+    loading,
+    setLoading
   };
   return (
     <div>

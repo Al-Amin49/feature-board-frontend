@@ -2,14 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import signinImg from "../../assets/img/login.png";
 import { loginUser } from "../../api/User";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading/Loading";
+import { useAuth } from "../../context/UserProvider";
 const Login = () => {
   const navigate = useNavigate();
   const { handleSubmit, reset, register } = useForm();
 
-  const [loading, setLoading] = useState(false);
+  const {loading, setLoading, setUser} = useAuth();
 
   const onSubmit = async (data) => {
     const userData = {
@@ -22,6 +22,7 @@ const Login = () => {
       const response = await loginUser(userData);
       console.log('Server Response:', response);
       if (response && response.data) {
+        setUser(response.data)
         reset();
         navigate("/");
         toast.success("Login Successfully");

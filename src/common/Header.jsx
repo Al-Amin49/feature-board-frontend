@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/UserProvider";
+import Loading from "../components/Loading/Loading";
 
 const Header = () => {
-  const {user}= useAuth()
-  console.log('user', user.email)
-
+  const {user,loading, logOut}= useAuth()
+  console.log('user', user?.email)
+  if(loading || user){
+    <Loading/>
+  }
+  const handleLogout = () => {
+    console.log('logout', logOut())
+    logOut();
+  
+  };
   const profile = (
     <>
      <div className="dropdown dropdown-end">
@@ -21,7 +29,7 @@ const Header = () => {
           <Link to="/profile" className="justify-between">Profile</Link>
         </li>
         <li>
-          <Link>Logout</Link>
+          <Link onClick={handleLogout}>Logout</Link>
         </li>
       </ul>
             </div>
