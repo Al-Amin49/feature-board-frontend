@@ -1,4 +1,5 @@
 //registered user
+
 import { axiosOpen } from "../utils/axios";
 
 export const signUpUser = async (userData) => {

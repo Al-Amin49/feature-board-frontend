@@ -3,6 +3,8 @@ import signUpImg from "../../assets/img/login.png";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { signUpUser } from "../../api/User";
+import { useState } from "react";
+import Loading from "../../components/Loading/Loading";
 const Signup = () => {
   const navigate = useNavigate();
   const {
@@ -12,6 +14,8 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
+  const [loading, setLoading]=useState(false)
+
   const onSubmit = async (data) => {
     const userData = {
       username: data.username,
@@ -19,6 +23,7 @@ const Signup = () => {
       password: data.password,
     };
     try {
+      setLoading(true)
       const response = await signUpUser(userData);
       if (response && response.data) {
         reset();
@@ -38,10 +43,17 @@ const Signup = () => {
         position: "top-center",
       });
     }
+    finally{
+      setLoading(false)
+    }
   };
   return (
     <>
-      <div className="hero bg-secondary">
+   
+   <div className="bg-secondary">
+    {/* loading state */}
+   {loading?<Loading/>: ""}
+   <div className="hero ">
         <div className="hero-content flex-col lg:flex-row">
           <div className="">
             <img src={signUpImg} className="w-full" alt="" />
@@ -124,6 +136,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
+   </div>
     </>
   );
 };

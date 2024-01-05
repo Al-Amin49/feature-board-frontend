@@ -1,17 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import { RouterProvider } from 'react-router-dom'
-import { router } from './routes/Router.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/Router.jsx";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from 'react-toastify'
-ReactDOM.createRoot(document.getElementById('root')).render(
+import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient();
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-
-<ToastContainer/>
-  <RouterProvider
-   router={router}
-   ></RouterProvider>
-  
+    <QueryClientProvider client={queryClient}>
+      <ToastContainer />
+      <RouterProvider router={router}></RouterProvider>
+    </QueryClientProvider>
   </React.StrictMode>
-)
+);
