@@ -50,7 +50,7 @@ const Signup = () => {
   return (
     <>
    
-   <div className="bg-secondary">
+   <div className="bg-secondary mb-10">
     {/* loading state */}
    {loading?<Loading/>: ""}
    <div className="hero ">

@@ -38,10 +38,10 @@ const Login = () => {
     }
   };
   return (
-    <div className="bg-secondary">
+    <div className="bg-secondary mb-10">
       {loading ? <Loading /> : ""}
-      <div className="hero">
-        <div className="hero-content flex-col lg:flex-row">
+      <div className="hero ">
+        <div className="hero-content flex-col lg:flex-row ">
           <div className="">
             <img src={signinImg} className="" alt="" />
           </div>
