@@ -1,6 +1,7 @@
 import FeatureBoard from "./FeatureBoard";
 
 const FeatureRequests = () => {
+    
   return (
     <div className="hero ">
       <div className="hero-content flex-col lg:flex-row sticky">

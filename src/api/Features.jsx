@@ -21,3 +21,14 @@ export const searchFeatures = async (query) => {
         throw error;
       }
   };
+
+// Function to sort features
+export const sortFeatures = async (sortOption) => {
+    try {
+      const response = await axiosOpen.get(`/api/v1/features/sort/${sortOption}`);
+      return response;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
