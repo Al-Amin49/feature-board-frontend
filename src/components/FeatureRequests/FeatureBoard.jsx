@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { getAllFeatures } from "../../api/Features";
+import { getAllFeatures, searchFeatures } from "../../api/Features";
 import Loading from "../Loading/Loading";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { BiUpvote } from "react-icons/bi";
+import SearchBar from "./SearchBar";
 const FeatureBoard = () => {
   const [features, setFeatures] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [selectedOption, setSelectedOption] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,7 +23,28 @@ const FeatureBoard = () => {
 
     fetchData();
   }, []);
-  const [selectedOption, setSelectedOption] = useState("");
+  const handleSearch = async () => {
+    try {
+    console.log('Searching with query:', searchQuery);
+      setLoading(true);
+      const response = await searchFeatures(searchQuery);
+      setFeatures(response.data);
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChangeSearch = (e) => {
+    if (e && e.target) {
+      console.log('e.target', e.target.value);
+      setSearchQuery(e.target.value);
+    } else {
+      console.error('Invalid event or target');
+    }
+  };
+
 
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
@@ -56,16 +79,11 @@ const FeatureBoard = () => {
               </div>
             </h3>
             <div>
-         <fieldset className="form-control w-80">
-            <div className="join">
-              <input
-                type="text"
-                placeholder="search"
-                className="input input-bordered join-item"
-              />
-            
-            </div>
-          </fieldset>
+            <SearchBar
+              searchQuery={searchQuery}
+              onSearchChange={handleChangeSearch}
+              onSearchSubmit={handleSearch}
+            />
          </div>
           </div>
 
