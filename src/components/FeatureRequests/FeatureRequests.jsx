@@ -5,7 +5,7 @@ const FeatureRequests = () => {
     <div className="hero ">
       <div className="hero-content flex-col lg:flex-row ">
         <div>
-          <div className="shadow-2xl px-10 py-6 border-spacing-2 text-center sticky">
+          <div className="shadow-2xl border-2 px-10 py-6 border-spacing-2 text-center sticky">
             <h3>Feature Request</h3>
             <p>Let us know what features you&rsquo;d like to see</p>
             <form action="">
