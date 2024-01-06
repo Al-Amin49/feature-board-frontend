@@ -1,9 +1,11 @@
+import FeatureBoard from "./FeatureBoard";
+
 const FeatureRequests = () => {
   return (
     <div className="hero ">
       <div className="hero-content flex-col lg:flex-row ">
         <div>
-          <div className="shadow-lg p-10 text-center">
+          <div className="shadow-2xl px-10 py-6 border-spacing-2 text-center sticky">
             <h3>Feature Request</h3>
             <p>Let us know what features you&rsquo;d like to see</p>
             <form action="">
@@ -38,13 +40,7 @@ const FeatureRequests = () => {
           </div>
         </div>
         <div className="pl-10"> 
-          <h1 className="text-5xl font-bold">Box Office News!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-          <button className="btn btn-primary">Get Started</button>
+          <FeatureBoard/>
         </div>
       </div>
     </div>

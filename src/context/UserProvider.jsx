@@ -46,7 +46,6 @@ export const UserProvider = ({ children }) => {
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const authContextValue = useContext(UserContext);
-  console.log('authcontext', authContextValue)
   if (!authContextValue) {
     throw new Error("useAuth must be used within the AuthProvider");
   }

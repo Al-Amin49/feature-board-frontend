@@ -4,12 +4,10 @@ import Loading from "../components/Loading/Loading";
 
 const Header = () => {
   const {user,loading, logOut}= useAuth()
-  console.log('user', user?.email)
   if(loading || user){
     <Loading/>
   }
   const handleLogout = () => {
-    console.log('logout', logOut())
     logOut();
   
   };

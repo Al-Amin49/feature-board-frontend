@@ -20,7 +20,6 @@ const Login = () => {
     try {
       setLoading(true);
       const response = await loginUser(userData);
-      console.log('Server Response:', response);
       if (response && response.data) {
         setUser(response.data)
         reset();
