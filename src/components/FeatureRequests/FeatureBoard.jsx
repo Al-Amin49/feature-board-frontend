@@ -90,6 +90,10 @@ const FeatureBoard = () => {
          
           <div>
             <hr />
+           {features.length===0 ? 
+            <p className="my-4 text-xl font-medium">No results found. Try a different search or create a new post!</p>
+           : 
+           <>
             {features.map((feature, index) => (
               <>
                 <div key={index} className="p-2 m-2 flex justify-between items-center">
@@ -116,6 +120,7 @@ const FeatureBoard = () => {
                 <hr />
               </>
             ))}
+           </>}
             <hr />
           </div>
         </div>
