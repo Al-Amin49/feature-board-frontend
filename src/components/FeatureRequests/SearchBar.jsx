@@ -1,12 +1,9 @@
 import { debounce } from "lodash";
 
 const SearchBar = ({ searchQuery, onSearchChange, onSearchSubmit }) => {
-  // const handleKeyDown = (e) => {
-  //   if (e.key === "Enter") {
-  //     onSearchSubmit();
-  //   }
-  // };
+
   const debouncedSubmit = debounce((value) => onSearchSubmit(value), 500);
+  
   const handleChange = (e) => {
     if (e && e.target) {
       const inputValue = e.target.value;

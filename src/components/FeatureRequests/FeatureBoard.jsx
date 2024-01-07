@@ -4,11 +4,13 @@ import Loading from "../Loading/Loading";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { BiUpvote } from "react-icons/bi";
 import SearchBar from "./SearchBar";
+import { Link} from "react-router-dom";
 const FeatureBoard = ({features, setFeatures}) => {
   // const [features, setFeatures] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -89,38 +91,40 @@ const FeatureBoard = ({features, setFeatures}) => {
 
          
           <div>
-            <hr />
-           {features.length===0 ? 
-            <p className="my-4 text-xl font-medium">No results found. Try a different search or create a new post!</p>
-           : 
-           <>
-            {features.map((feature, index) => (
+          <hr />
+            {features.length === 0 ? (
+              <p className="my-4 text-xl font-medium">
+                No results found. Try a different search or create a new post!
+              </p>
+            ) : (
               <>
-                <div key={index} className="p-2 m-2 flex justify-between items-center">
-                  <div>
-                  <h4 className="font-medium text-xl">{feature.title}</h4>
-                    <p className="text-accent my-2">{feature.description}</p>
-                  <p className="flex items-center ">
-                    <span className="mr-1">
-                      <FaRegCommentAlt />{" "}
-                    </span>
-                    {feature.comments ? 0 : 0}
-                  </p>
-
-                  </div>
-                  <div>
-                  <p className="flex flex-col  items-center border-2 p-2 border-r-2">
-                      <span className="">
-                        <BiUpvote />{" "}
-                      </span>
-                      {feature.votes ? 0 : 0}
-                    </p>
-                  </div>
-                </div>
-                <hr />
+                {features.map((feature, index) => (
+                  <Link key={feature._id || index} to={`/features/${feature._id}`}>
+                    {/* Wrap each feature item with a Link to navigate to its details */}
+                    <div className="p-2 m-2 flex justify-between items-center">
+                      <div>
+                        <h4 className="font-medium text-xl">{feature.title}</h4>
+                        <p className="text-accent my-2">{feature.description}</p>
+                        <p className="flex items-center ">
+                          <span className="mr-1">
+                            <FaRegCommentAlt />{" "}
+                          </span>
+                          {feature.comments ? 0 : 0}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="flex flex-col  items-center border-2 p-2 border-r-2">
+                          <span className="">
+                            <BiUpvote />{" "}
+                          </span>
+                          {feature.votes ? 0 : 0}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </>
-            ))}
-           </>}
+            )}
             <hr />
           </div>
         </div>

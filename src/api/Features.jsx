@@ -13,6 +13,18 @@ export const addFeature = async (featureData) => {
   }
 };
 
+//get single fetures
+
+export const getSingleFeatures=async(id)=>{
+  try {
+    const response = await axiosSecure.post(`/api/v1/features/${id}` );
+    return response;
+  } catch (error) {
+    console.error(error.response.data);
+    throw error.response?.data;
+  }
+}
+
 //get all features request
 export const getAllFeatures = async () => {
     try {

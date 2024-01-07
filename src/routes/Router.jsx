@@ -8,6 +8,7 @@ import FeatureRequests from "../components/FeatureRequests/FeatureRequests";
 import TabContent from "../components/TabContent/TabContent";
 import Bugs from "../components/Bugs/Bugs";
 import DatabaseRequest from "../components/DatabaseRequest/DatabaseRequest";
+import SingleFeatures from "../components/FeatureRequests/SingleFeatures";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
         path: "/signup",
         element: <Signup></Signup>,
       },
+      {
+        path: "/features/:id", 
+        element: <SingleFeatures />,
+      },
      
     ],
   },
@@ -33,7 +38,8 @@ export const router = createBrowserRouter([
     path: "/feedback",
     element: (
       <OpenLayout>
-        <TabContent />
+        <TabContent>
+           </TabContent>
       </OpenLayout>
     ),
     children: [

@@ -18,14 +18,15 @@ const FeatureRequests = () => {
     formState: { errors },
   } = useForm();
 
-  // if(!user){
-  //   navigate('/login')
-  // }
+
   const onSubmit = async (data) => {
     const featureData = {
       title: data.title,
       description: data.description,
     };
+    if(!user){
+      navigate('/login')
+    }
     try {
       setLoading(true);
       const response = await addFeature(featureData);
@@ -43,9 +44,7 @@ const FeatureRequests = () => {
         });
       }
     } catch (error) {
-      toast.error("Error during request", {
-        position: "top-center",
-      });
+      console.error("Error during request");
     } finally {
       setLoading(false);
     }
