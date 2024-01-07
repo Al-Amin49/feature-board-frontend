@@ -3,6 +3,7 @@ import { Tab } from "@headlessui/react";
 import FeatureRequests from "../FeatureRequests/FeatureRequests";
 import DatabaseRequest from "../DatabaseRequest/DatabaseRequest";
 import Bugs from "../Bugs/Bugs";
+import { Link } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -10,8 +11,8 @@ function classNames(...classes) {
 
 const TabContent = () => {
   let [categories] = useState({
-    Bugs: [],
     "Feature Requests": [],
+    Bugs: [],
     "Database Requests": [],
   });
 
@@ -36,7 +37,9 @@ const TabContent = () => {
                   )
                 }
               >
-                {category}
+                {/* <Link to={`/feedback/${category.replace(/\s+/g, "-").toLowerCase()}`}> */}
+                  {category}
+                {/* </Link> */}
               </Tab>
             ))}
           </Tab.List>

@@ -4,6 +4,10 @@ import Home from "../pages/Home/Home";
 import Signup from "../pages/Signup/Signup";
 import NotFound from "../common/NotFound";
 import Login from "../pages/Login/Login";
+import FeatureRequests from "../components/FeatureRequests/FeatureRequests";
+import TabContent from "../components/TabContent/TabContent";
+import Bugs from "../components/Bugs/Bugs";
+import DatabaseRequest from "../components/DatabaseRequest/DatabaseRequest";
 
 export const router = createBrowserRouter([
   {
@@ -22,8 +26,25 @@ export const router = createBrowserRouter([
         path: "/signup",
         element: <Signup></Signup>,
       },
+     
     ],
   },
+  {
+    path: "/feedback",
+    element: (
+      <OpenLayout>
+        <TabContent />
+      </OpenLayout>
+    ),
+    children: [
+      {
+        path: "feature-requests",
+        element: <FeatureRequests />,
+      },
+     
+    ],
+  },
+
   {
     path: "*",
     element: <NotFound />,
