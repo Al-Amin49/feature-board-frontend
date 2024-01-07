@@ -37,9 +37,9 @@ const TabContent = () => {
                   )
                 }
               >
-                {/* <Link to={`/feedback/${category.replace(/\s+/g, "-").toLowerCase()}`}> */}
+                
                   {category}
-                {/* </Link> */}
+                
               </Tab>
             ))}
           </Tab.List>

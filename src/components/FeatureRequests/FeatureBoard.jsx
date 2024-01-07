@@ -99,7 +99,7 @@ const FeatureBoard = ({features, setFeatures}) => {
             ) : (
               <>
                 {features.map((feature, index) => (
-                  <Link key={feature._id || index} to={`/features/${feature._id}`}>
+                  <Link key={feature._id || index} to={`/feedback/features/${feature._id}`}>
                     {/* Wrap each feature item with a Link to navigate to its details */}
                     <div className="p-2 m-2 flex justify-between items-center">
                       <div>

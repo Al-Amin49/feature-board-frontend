@@ -17,7 +17,7 @@ export const addFeature = async (featureData) => {
 
 export const getSingleFeatures=async(id)=>{
   try {
-    const response = await axiosSecure.get(`/api/v1/features/${id}` );
+    const response = await axiosOpen.get(`/api/v1/features/${id}` );
     return response;
   } catch (error) {
     console.error(error.response.data);
@@ -35,6 +35,28 @@ export const getAllFeatures = async () => {
       throw error.response?.data;
     }
   };
+
+  // Edit feature by ID
+export const editFeature = async (id, updatedData) => {
+  try {
+    const response = await axiosSecure.patch(`/api/v1/features/${id}`, updatedData);
+    return response;
+  } catch (error) {
+    console.error(error.response.data);
+    throw error.response?.data;
+  }
+};
+
+// Delete feature by ID
+export const deleteFeature = async (id) => {
+  try {
+    const response = await axiosSecure.delete(`/api/v1/features/${id}`);
+    return response;
+  } catch (error) {
+    console.error(error.response.data);
+    throw error.response?.data;
+  }
+};
 
 // Function to search features by query
 export const searchFeatures = async (query) => {

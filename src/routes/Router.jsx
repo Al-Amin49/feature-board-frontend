@@ -27,10 +27,7 @@ export const router = createBrowserRouter([
         path: "/signup",
         element: <Signup></Signup>,
       },
-      {
-        path: "/features/:id", 
-        element: <SingleFeatures />,
-      },
+     
      
     ],
   },
@@ -38,8 +35,7 @@ export const router = createBrowserRouter([
     path: "/feedback",
     element: (
       <OpenLayout>
-        <TabContent>
-           </TabContent>
+        <TabContent />
       </OpenLayout>
     ),
     children: [
@@ -47,8 +43,29 @@ export const router = createBrowserRouter([
         path: "feature-requests",
         element: <FeatureRequests />,
       },
-     
+      {
+        path: "features/:id", 
+        element: <SingleFeatures />,
+      },
     ],
+  },
+  {
+    path: "/bugs",
+    element: (
+      <OpenLayout>
+        <TabContent />
+        <Bugs />
+      </OpenLayout>
+    ),
+  },
+  {
+    path: "/database-requests",
+    element: (
+      <OpenLayout>
+        <TabContent />
+        <DatabaseRequest />
+      </OpenLayout>
+    ),
   },
 
   {
