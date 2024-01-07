@@ -17,7 +17,7 @@ export const addFeature = async (featureData) => {
 
 export const getSingleFeatures=async(id)=>{
   try {
-    const response = await axiosSecure.post(`/api/v1/features/${id}` );
+    const response = await axiosSecure.get(`/api/v1/features/${id}` );
     return response;
   } catch (error) {
     console.error(error.response.data);

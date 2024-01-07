@@ -6,7 +6,7 @@ import { BiUpvote } from "react-icons/bi";
 import SearchBar from "./SearchBar";
 import { Link} from "react-router-dom";
 const FeatureBoard = ({features, setFeatures}) => {
-  // const [features, setFeatures] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
