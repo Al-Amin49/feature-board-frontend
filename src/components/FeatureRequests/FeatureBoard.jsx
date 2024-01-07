@@ -4,8 +4,8 @@ import Loading from "../Loading/Loading";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { BiUpvote } from "react-icons/bi";
 import SearchBar from "./SearchBar";
-const FeatureBoard = () => {
-  const [features, setFeatures] = useState([]);
+const FeatureBoard = ({features, setFeatures}) => {
+  // const [features, setFeatures] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");

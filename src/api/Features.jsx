@@ -1,6 +1,19 @@
-import { axiosOpen } from "../utils/axios";
+import { axiosOpen, axiosSecure } from "../utils/axios";
 
 
+//add feature request 
+
+export const addFeature = async (featureData) => {
+  try {
+    const response = await axiosSecure.post("/api/v1/features", featureData);
+    return response;
+  } catch (error) {
+    console.error(error.response.data);
+    throw error.response?.data;
+  }
+};
+
+//get all features request
 export const getAllFeatures = async () => {
     try {
       const response = await axiosOpen.get("/api/v1/features");
