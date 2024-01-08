@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { getAllFeatures, searchFeatures } from "../../api/Features";
+import { getAllFeatures, searchFeatures, voteFeature } from "../../api/Features";
 import Loading from "../Loading/Loading";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { BiUpvote } from "react-icons/bi";
 import SearchBar from "./SearchBar";
 import { Link} from "react-router-dom";
+import { toast } from "react-toastify";
 const FeatureBoard = ({features, setFeatures}) => {
 
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,39 @@ const FeatureBoard = ({features, setFeatures}) => {
     }
   };
 
+  const handleVote = async (event, featureId) => {
+    try {
+      event.preventDefault()
+     setLoading(true)
+      // Make a request to the voteFeature API endpoint
+      await voteFeature(featureId);
+  
+      // Update the features after voting
+      // Fetch the updated features from the server
+      const updatedFeatures = await fetchUpdatedFeatures();
+  
+      // Set the updated features in the state
+      setFeatures(updatedFeatures);
+      toast.success('Vote added successfully')
+    } catch (error) {
+      console.error("Error voting:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  const fetchUpdatedFeatures = async () => {
+    try {
+      // Make a request to the API endpoint that provides the latest feature data
+      const response = await getAllFeatures(); // You may need to replace this with the actual API endpoint
+  
+      // Return the updated features from the API response
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching updated features:", error);
+      throw error; // You may want to handle this error based on your application's requirements
+    }
+  };
 
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
@@ -113,11 +147,13 @@ const FeatureBoard = ({features, setFeatures}) => {
                         </p>
                       </div>
                       <div>
-                        <p className="flex flex-col  items-center border-2 p-2 border-r-2">
+                        <p className="flex flex-col  items-center border-2 p-2 border-r-2"
+                       onClick={(event) => handleVote(event, feature._id)}
+                        >
                           <span className="">
                             <BiUpvote />{" "}
                           </span>
-                          {feature.votes ? 0 : 0}
+                          {feature.votes ? feature.votes.length : 0}
                         </p>
                       </div>
                     </div>
