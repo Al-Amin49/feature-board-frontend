@@ -55,9 +55,9 @@ const FeatureRequests = () => {
         <Loading />
       ) : (
         <div className="hero ">
-          <div className="hero-content flex-col lg:flex-row sticky">
-            <div>
-              <div className="shadow-2xl border-2 px-10 py-4 border-spacing-2 text-center sticky">
+          <div className="hero-content flex-col lg:flex-row  items-start">
+            <div className="sticky top-0 z-10">
+              <div className="shadow-2xl border-2 px-10 py-4 border-spacing-2 text-center ">
                 <h3>Feature Request</h3>
                 <p>Let us know what features you&rsquo;d like to see</p>
                 <form onSubmit={handleSubmit(onSubmit)}>

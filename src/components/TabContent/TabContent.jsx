@@ -13,7 +13,7 @@ const TabContent = () => {
   let [categories] = useState({
     "Feature Requests": [],
     Bugs: [],
-    "Database Requests": [],
+    // "Database Requests": [],
   });
 
   return (
