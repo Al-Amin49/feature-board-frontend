@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
-import { getAllFeatures, searchFeatures, voteFeature } from "../../api/Features";
+import {
+  getAllFeatures,
+  searchFeatures,
+  voteFeature,
+} from "../../api/Features";
 import Loading from "../Loading/Loading";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { BiUpvote } from "react-icons/bi";
 import SearchBar from "./SearchBar";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-const FeatureBoard = ({features, setFeatures}) => {
-
+import { useAuth } from "../../context/UserProvider";
+const FeatureBoard = ({ features, setFeatures }) => {
   const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
- 
+  const { user } = useAuth();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,7 +33,7 @@ const FeatureBoard = ({features, setFeatures}) => {
   }, []);
   const handleSearch = async () => {
     try {
-    console.log('Searching with query:', searchQuery);
+      console.log("Searching with query:", searchQuery);
       setLoading(true);
       const response = await searchFeatures(searchQuery);
       setFeatures(response.data);
@@ -41,39 +46,56 @@ const FeatureBoard = ({features, setFeatures}) => {
 
   const handleChangeSearch = (e) => {
     if (e && e.target) {
-      console.log('e.target', e.target.value);
+      console.log("e.target", e.target.value);
       setSearchQuery(e.target.value);
     } else {
-      console.error('Invalid event or target');
+      console.error("Invalid event or target");
     }
   };
 
   const handleVote = async (event, featureId) => {
     try {
-      event.preventDefault()
-     setLoading(true)
+      event.preventDefault();
+      setLoading(true);
+
       // Make a request to the voteFeature API endpoint
       await voteFeature(featureId);
-  
+
       // Update the features after voting
       // Fetch the updated features from the server
       const updatedFeatures = await fetchUpdatedFeatures();
-  
+
       // Set the updated features in the state
       setFeatures(updatedFeatures);
-      toast.success('Vote added successfully')
+
+      // Check if the user is authenticated
+      if (user) {
+        // Check if the user has already voted or unvoted
+        const hasVoted = updatedFeatures
+          .find((feature) => feature._id === featureId)
+          ?.votes.some((vote) => vote.equals(user._id));
+
+        // Show a toast message based on the voting status
+        if (hasVoted) {
+          toast.success("Vote removed successfully");
+        } else {
+          toast.success("Vote added successfully");
+        }
+      } else {
+        // Show a message for non-authenticated users
+        toast.info("Please log in to vote");
+      }
     } catch (error) {
       console.error("Error voting:", error);
     } finally {
       setLoading(false);
     }
   };
-  
   const fetchUpdatedFeatures = async () => {
     try {
       // Make a request to the API endpoint that provides the latest feature data
-      const response = await getAllFeatures(); // You may need to replace this with the actual API endpoint
-  
+      const response = await getAllFeatures();
+
       // Return the updated features from the API response
       return response.data;
     } catch (error) {
@@ -92,7 +114,7 @@ const FeatureBoard = ({features, setFeatures}) => {
       ) : (
         <div className="border-2 p-4 ">
           <div className="flex justify-around  items-center">
-            <h3 >
+            <h3>
               <div>
                 <span className="mr-2">Showing </span>
                 <select
@@ -115,17 +137,16 @@ const FeatureBoard = ({features, setFeatures}) => {
               </div>
             </h3>
             <div>
-            <SearchBar
-              searchQuery={searchQuery}
-              onSearchChange={handleChangeSearch}
-              onSearchSubmit={handleSearch}
-            />
-         </div>
+              <SearchBar
+                searchQuery={searchQuery}
+                onSearchChange={handleChangeSearch}
+                onSearchSubmit={handleSearch}
+              />
+            </div>
           </div>
 
-         
           <div>
-          <hr />
+            <hr />
             {features.length === 0 ? (
               <p className="my-4 text-xl font-medium">
                 No results found. Try a different search or create a new post!
@@ -133,12 +154,17 @@ const FeatureBoard = ({features, setFeatures}) => {
             ) : (
               <>
                 {features.map((feature, index) => (
-                  <Link key={feature._id || index} to={`/feedback/features/${feature._id}`}>
+                  <Link
+                    key={feature._id || index}
+                    to={`/feedback/features/${feature._id}`}
+                  >
                     {/* Wrap each feature item with a Link to navigate to its details */}
                     <div className="p-2 m-2 flex justify-between items-center">
                       <div>
                         <h4 className="font-medium text-xl">{feature.title}</h4>
-                        <p className="text-accent my-2">{feature.description}</p>
+                        <p className="text-accent my-2">
+                          {feature.description}
+                        </p>
                         <p className="flex items-center ">
                           <span className="mr-1">
                             <FaRegCommentAlt />{" "}
@@ -147,8 +173,9 @@ const FeatureBoard = ({features, setFeatures}) => {
                         </p>
                       </div>
                       <div>
-                        <p className="flex flex-col  items-center border-2 p-2 border-r-2"
-                       onClick={(event) => handleVote(event, feature._id)}
+                        <p
+                          className="flex flex-col  items-center border-2 p-2 border-r-2"
+                          onClick={(event) => handleVote(event, feature._id)}
                         >
                           <span className="">
                             <BiUpvote />{" "}
