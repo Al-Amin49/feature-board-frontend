@@ -79,3 +79,14 @@ export const sortFeatures = async (sortOption) => {
       throw error;
     }
   };
+
+// Vote for a feature by ID
+export const voteFeature = async (id) => {
+  try {
+    const response = await axiosSecure.post(`/api/v1/features/${id}/vote`);
+    return response;
+  } catch (error) {
+    console.error(error.response.data);
+    throw error.response?.data;
+  }
+};
