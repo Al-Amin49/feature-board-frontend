@@ -75,22 +75,22 @@ const SingleFeatures = () => {
   return (
     <div className="flex justify-around py-4 ">
       <div>
-      {singleFeature ? (
-      <>
-        <Link to="/">
-          <h3 className="text-base p-2 border-2 rounded flex items-center">
-            <FaLongArrowAltLeft />
-            Back to all posts
-          </h3>
-        </Link>
-        <GetAlllVotes
-          singleFeature={singleFeature}
-          setSingleFeature={setSingleFeature}
-        />
-      </>
-    ) : (
-      <Loading/>
-    )}
+        {singleFeature ? (
+          <>
+            <Link to="/">
+              <h3 className="text-base p-2 border-2 rounded flex items-center">
+                <FaLongArrowAltLeft />
+                Back to all posts
+              </h3>
+            </Link>
+            <GetAlllVotes
+              singleFeature={singleFeature}
+              setSingleFeature={setSingleFeature}
+            />
+          </>
+        ) : (
+          <Loading />
+        )}
       </div>
       <div>
         <div className="flex items-center">
@@ -163,10 +163,9 @@ const SingleFeatures = () => {
                 <RiDeleteBinLine />
               </button>
             </div>
-            
           </div>
         )}
-        <AddComment/>
+        <AddComment singleFeature={singleFeature} setSingleFeature={setSingleFeature}/>
       </div>
     </div>
   );
