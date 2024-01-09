@@ -13,6 +13,7 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import { toast } from "react-toastify";
 import GetAlllVotes from "../votes/GetAlllVotes";
 import Loading from "../Loading/Loading";
+import AddComment from "../Comments/AddComment";
 
 const SingleFeatures = () => {
   const [singleFeature, setSingleFeature] = useState({});
@@ -162,8 +163,10 @@ const SingleFeatures = () => {
                 <RiDeleteBinLine />
               </button>
             </div>
+            
           </div>
         )}
+        <AddComment/>
       </div>
     </div>
   );
