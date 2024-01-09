@@ -60,7 +60,7 @@ const AddVote = ({feature,setFeatures}) => {
           const response = await getAllFeatures();
     
           // Return the updated features from the API response
-          return response.data;
+          return response.data.features;
         } catch (error) {
           console.error("Error fetching updated features:", error);
           throw error; // You may want to handle this error based on your application's requirements

@@ -26,9 +26,9 @@ export const getSingleFeatures=async(id)=>{
 }
 
 //get all features request
-export const getAllFeatures = async () => {
+export const getAllFeatures = async (params) => {
     try {
-      const response = await axiosOpen.get("/api/v1/features");
+      const response = await axiosOpen.get("/api/v1/features", {params});
       return response;
     } catch (error) {
       console.error(error.response.data);

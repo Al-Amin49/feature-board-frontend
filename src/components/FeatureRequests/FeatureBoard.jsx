@@ -10,27 +10,46 @@ const FeatureBoard = ({ features, setFeatures }) => {
   const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
+
+  const fetchData = async (newPage) => {
+    try {
+      console.log('Fetching data for page', newPage);
+      const response = await getAllFeatures({ page:  newPage});
+      console.log('response', response)
+      setFeatures(response.data.features);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handlePageChange = async(newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      console.log('Changing page to', newPage);
+      setCurrentPage(newPage);
+       setLoading(true);
+    await fetchData(newPage);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getAllFeatures();
-        setFeatures(response.data);
-      } catch (error) {
-        console.log("error", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+   
 
-    fetchData();
+    fetchData(currentPage);
   }, []);
   const handleSearch = async () => {
     try {
       console.log("Searching with query:", searchQuery);
       setLoading(true);
       const response = await searchFeatures(searchQuery);
-      setFeatures(response.data);
+      // Check the structure of the response and update your code accordingly
+      const searchResults = response.data.features || response.data;
+
+      setFeatures(searchResults);
+      setTotalPages(searchResults.totalPages || 1);
     } catch (error) {
       console.log("error", error);
     } finally {
@@ -81,11 +100,15 @@ const FeatureBoard = ({ features, setFeatures }) => {
     setFeatures(sortedFeatures);
   };
 
+ 
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
+    // Reset to the first page when changing the sorting option
+    setCurrentPage(1); 
   };
   return (
     <div>
+     
       {loading ? (
         <Loading />
       ) : (
@@ -126,13 +149,9 @@ const FeatureBoard = ({ features, setFeatures }) => {
 
           <div>
             <hr />
-            {features.length === 0 ? (
-              <p className="my-4 text-xl font-medium">
-                No results found. Try a different search or create a new post!
-              </p>
-            ) : (
+             
               <>
-                {features.map((feature, index) => (
+                { features.map((feature, index) => (
                   <Link
                     key={feature._id || index}
                     to={`/feedback/features/${feature._id}`}
@@ -152,15 +171,6 @@ const FeatureBoard = ({ features, setFeatures }) => {
                         </p>
                       </div>
                       <div>
-                        {/* <p
-                          className="flex flex-col  items-center border-2 p-2 border-r-2"
-                          onClick={(event) => handleVote(event, feature._id)}
-                        >
-                          <span className="">
-                            <BiUpvote />{" "}
-                          </span>
-                          {feature.votes ? feature.votes.length : 0}
-                        </p> */}
                         <AddVote
                           feature={feature}
                           setFeatures={setFeatures}
@@ -170,11 +180,31 @@ const FeatureBoard = ({ features, setFeatures }) => {
                   </Link>
                 ))}
               </>
-            )}
+           
             <hr />
           </div>
         </div>
       )}
+      
+      <div className="flex justify-center items-center mt-4">
+              <button
+                className="btn btn-primary mr-1" 
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <span>
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                className="btn btn-primary ml-1"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
     </div>
   );
 };

@@ -35,7 +35,7 @@ const FeatureRequests = () => {
       console.log("data", response);
       if (response && response.data) {
         // Update local state with the new feature
-        setFeatures((prevFeatures) => [...prevFeatures, response.data]);
+        setFeatures((prevFeatures) => [...prevFeatures, response.data.features]);
         reset();
         toast.success("Request added successfully", {
           position: "top-center",
