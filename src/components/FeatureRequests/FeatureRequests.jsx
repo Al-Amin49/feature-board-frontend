@@ -11,6 +11,7 @@ const FeatureRequests = () => {
   const [features, setFeatures] = useState([]);
   const { loading, setLoading, user } = useAuth();
   const navigate = useNavigate();
+ 
   const {
     handleSubmit,
     reset,
@@ -18,14 +19,15 @@ const FeatureRequests = () => {
     formState: { errors },
   } = useForm();
 
-
+  
   const onSubmit = async (data) => {
     const featureData = {
       title: data.title,
       description: data.description,
     };
-    if(!user){
+    if (!user) {
       navigate('/login')
+      return;
     }
     try {
       setLoading(true);

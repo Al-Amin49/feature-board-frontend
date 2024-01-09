@@ -80,10 +80,22 @@ export const sortFeatures = async (sortOption) => {
     }
   };
 
-// Vote for a feature by ID
+// add Vote for a feature by ID
 export const voteFeature = async (id) => {
   try {
     const response = await axiosSecure.post(`/api/v1/features/${id}/vote`);
+    return response;
+  } catch (error) {
+    console.error("Error in voteFeature API call:", error);
+    throw new Error("Failed to vote on the feature.");
+  }
+};
+
+// get  all voters
+
+export const getAllVoters = async (id) => {
+  try {
+    const response = await axiosOpen.get(`/api/v1/features/${id}/vote`);
     return response;
   } catch (error) {
     console.error(error.response.data);

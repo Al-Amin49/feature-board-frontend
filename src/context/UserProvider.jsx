@@ -27,7 +27,6 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUserData();
-    logOut
   }, []);
 
   const authInfo = {
