@@ -16,7 +16,7 @@ const SearchBar = ({ searchQuery, onSearchChange, onSearchSubmit }) => {
   };
 
   return (
-    <fieldset className="form-control w-80">
+    <fieldset className="form-control w-80 px-4">
       <div className="join">
         <input
           type="text"

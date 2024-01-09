@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  getAllFeatures,
-  searchFeatures,
-} from "../../api/Features";
+import { getAllFeatures, searchFeatures } from "../../api/Features";
 import Loading from "../Loading/Loading";
 import { FaRegCommentAlt } from "react-icons/fa";
 
@@ -13,7 +10,6 @@ const FeatureBoard = ({ features, setFeatures }) => {
   const [loading, setLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,6 +47,39 @@ const FeatureBoard = ({ features, setFeatures }) => {
     }
   };
 
+  const handleSort = () => {
+    let sortedFeatures = [...features];
+
+    switch (selectedOption) {
+      case "trending":
+        sortedFeatures.sort(
+          (a, b) =>
+            b.votes.length +
+            b.comments.length -
+            (a.votes.length + a.comments.length)
+        );
+        break;
+
+      case "top":
+        sortedFeatures.sort((a, b) => b.votes.length - a.votes.length);
+        break;
+
+      case "new":
+        sortedFeatures.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        break;
+
+      case "alphabetical":
+        sortedFeatures.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+
+      default:
+        break;
+    }
+
+    setFeatures(sortedFeatures);
+  };
 
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
@@ -69,11 +98,13 @@ const FeatureBoard = ({ features, setFeatures }) => {
                   value={selectedOption}
                   onChange={handleChange}
                   className="select select-accent max-w-32 "
+                  onClick={handleSort}
                 >
                   <optgroup label="Sort">
                     <option value="trending">Trending</option>
                     <option value="top">Top</option>
                     <option value="new">New</option>
+                    <option value="alphabetical">Alphabeticall</option>
                   </optgroup>
                   {/* <optgroup label="Filter">
                     <option value="under-review">Under Review</option>
@@ -81,7 +112,7 @@ const FeatureBoard = ({ features, setFeatures }) => {
                     <option value="in-progress">In Progress</option>
                   </optgroup> */}
                 </select>
-                <span className="ml-2">Post</span>
+                <span className="ml-2"> Post </span>
               </div>
             </h3>
             <div>
@@ -117,7 +148,7 @@ const FeatureBoard = ({ features, setFeatures }) => {
                           <span className="mr-1">
                             <FaRegCommentAlt />{" "}
                           </span>
-                          {feature.comments ? 0 : 0}
+                          {feature.comments ? feature.comments.length : 0}
                         </p>
                       </div>
                       <div>
@@ -130,7 +161,10 @@ const FeatureBoard = ({ features, setFeatures }) => {
                           </span>
                           {feature.votes ? feature.votes.length : 0}
                         </p> */}
-                        <AddVote feature={feature} setFeatures={setFeatures}></AddVote>
+                        <AddVote
+                          feature={feature}
+                          setFeatures={setFeatures}
+                        ></AddVote>
                       </div>
                     </div>
                   </Link>
