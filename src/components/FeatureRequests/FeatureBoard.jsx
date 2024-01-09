@@ -150,6 +150,11 @@ const FeatureBoard = ({ features, setFeatures }) => {
           <div>
             <hr />
              
+              {features.length===0? 
+               <p className="my-4 text-xl font-medium">
+               We couldnt find anything. Try a new search or create a new post!
+             </p>
+              :
               <>
                 { features.map((feature, index) => (
                   <Link
@@ -180,6 +185,7 @@ const FeatureBoard = ({ features, setFeatures }) => {
                   </Link>
                 ))}
               </>
+            }
            
             <hr />
           </div>
