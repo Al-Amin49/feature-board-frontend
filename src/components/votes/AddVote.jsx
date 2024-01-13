@@ -36,9 +36,7 @@ const AddVote = ({feature,setFeatures}) => {
             // Show a toast message based on the voting status
             if (hasVoted) {
               toast.success("Vote added successfully");
-            } else {
-              toast.success("Vote removed successfully");
-            }
+            } 
           } else {
             
               navigate("/login"); 
