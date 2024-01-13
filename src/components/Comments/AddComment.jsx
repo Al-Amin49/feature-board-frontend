@@ -8,10 +8,10 @@ const AddComment = ({ singleFeatures, setSingleFeature }) => {
         placeholder="Leave a comment"
         className="input input-bordered input-accent w-full max-w-xs"
       />
-      <GetAllComments
+      {/* <GetAllComments
         singleFeatures={singleFeatures}
         setSingleFeature={setSingleFeature}
-      ></GetAllComments>
+      ></GetAllComments> */}
     </div>
   );
 };

@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/UserProvider";
 import Loading from "../components/Loading/Loading";
 
 const Header = () => {
-  const {user,loading, logOut}= useAuth()
+  const {user,loading, logOut}= useAuth();
+  const navigate=useNavigate();
   if(loading || user){
     <Loading/>
   }
   const handleLogout = () => {
     logOut();
-  
+    navigate('/')
   };
   const profile = (
     <>

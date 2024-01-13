@@ -40,15 +40,13 @@ const AddVote = ({feature,setFeatures}) => {
               toast.success("Vote removed successfully");
             }
           } else {
-            // Show a message for non-authenticated users
-              // If not authenticated, navigate to the login page
-              navigate("/login"); // Replace "/login" with your actual login page path
+            
+              navigate("/login"); 
               return;
             
           }
         } catch (error) {
             console.error("Error voting:", error);
-            // Log the entire error object for more details
             console.log("Full error object:", error);
         } finally {
           setLoading(false);
@@ -58,12 +56,10 @@ const AddVote = ({feature,setFeatures}) => {
         try {
           // Make a request to the API endpoint that provides the latest feature data
           const response = await getAllFeatures();
-    
-          // Return the updated features from the API response
           return response.data.features;
         } catch (error) {
           console.error("Error fetching updated features:", error);
-          throw error; // You may want to handle this error based on your application's requirements
+          throw error; 
         }
       };
     
