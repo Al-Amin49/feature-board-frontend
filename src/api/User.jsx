@@ -51,3 +51,13 @@ export const getAllUsers=async()=>{
     console.log(error)
   }
 }
+
+export const deletedUser = async (id) => {
+  try {
+    const response = await axiosSecure.delete(`/api/v1/users/${id}`);
+    return response;
+  } catch (error) {
+    console.error(error.response.data);
+    throw error.response?.data;
+  }
+};
