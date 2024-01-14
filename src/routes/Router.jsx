@@ -12,6 +12,7 @@ import SingleFeatures from "../components/FeatureRequests/SingleFeatures";
 import PrivateLayout from "../components/layout/PrivateLayout";
 import Dashboard from "../components/layout/Dashboard";
 import AllUsers from "../pages/Dashboard/AllUsers";
+import AdminHome from "../pages/Dashboard/AdminHome";
 
 export const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path:'allusers',
         element:<AllUsers></AllUsers>
+      },
+      {
+        path:'adminHome',
+        element:<AdminHome></AdminHome>
       }
     ]
   },

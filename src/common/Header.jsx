@@ -49,7 +49,7 @@ const Header = () => {
          <>
          {user.role === 'admin' && (
            <li>
-             <Link to="/dashboard">Dashboard</Link>
+             <Link to="/dashboard/adminHome">Dashboard</Link>
            </li>
          )}
          {profile}
