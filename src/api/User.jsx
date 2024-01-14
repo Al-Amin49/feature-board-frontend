@@ -61,3 +61,13 @@ export const deletedUser = async (id) => {
     throw error.response?.data;
   }
 };
+//make admin 
+export const makeAdminUser = async (id) => {
+  try {
+    const response = await axiosSecure.put(`/api/v1/users/makeAdmin/${id}`);
+    return response;
+  } catch (error) {
+    console.error(error.response.data);
+    throw error.response?.data;
+  }
+};

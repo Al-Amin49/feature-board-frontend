@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deletedUser, getAllUsers } from "../../api/User";
+import { deletedUser, getAllUsers, makeAdminUser } from "../../api/User";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 
@@ -20,7 +20,43 @@ const AllUsers = () => {
     fetchAllUsersData();
   }, []);
 
-  const handleMakeAdmin = () => {};
+  //handleMakeAdmin
+  const handleMakeAdmin = async (id) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "to make admin ",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, make it admin",
+      });
+
+      if (result.isConfirmed) {
+        await makeAdminUser(id);
+
+        // Update the state to modify the user's role in the UI
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user._id === id ? { ...user, role: "admin" } : user
+          )
+        );
+        Swal.fire({
+          title: "Make Admin successfully",
+          text: "user role updated to admin",
+          icon: "success",
+        });
+      }
+    } catch (error) {
+      console.error("Error makeadmin user:", error);
+      Swal.fire({
+        title: "Error",
+        text: "An error occurred while deleting the user.",
+        icon: "error",
+      });
+    }
+  };
   //delete a user
   const handleDeleteUser = async (id) => {
     try {
@@ -96,7 +132,12 @@ const AllUsers = () => {
                   )}
                 </td>
                 <td>
-                  <button className="btn btn-primary">Make Admin</button>
+                  <button
+                    onClick={() => handleMakeAdmin(user._id)}
+                    className="btn btn-primary"
+                  >
+                    Make Admin
+                  </button>
                 </td>
                 <td>
                   <button
