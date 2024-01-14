@@ -5,6 +5,7 @@ export const signUpUser = async (userData) => {
   try {
     const response = await axiosOpen.post("api/v1/users/register", userData);
     const { token } = response.data;
+    console.log('token register',token)
     localStorage.setItem("token", token);
     return response;
   } catch (error) {
@@ -18,6 +19,7 @@ export const loginUser = async (userData) => {
   try {
     const response = await axiosOpen.post("api/v1/users/login", userData);
     const { token } = response.data;
+    console.log('token login',token)
     localStorage.setItem("token", token);
     return response;
   } catch (error) {
@@ -30,7 +32,9 @@ export const loginUser = async (userData) => {
 
 export const userDetails=async()=>{
   try{
+    console.log('Headers before request:', axiosSecure.defaults.headers)
     const response= await axiosSecure.get('api/v1/users/user');
+    console.log('Response from userDetails API:', response);
     return response;
   }catch (error) {
     console.log(error);

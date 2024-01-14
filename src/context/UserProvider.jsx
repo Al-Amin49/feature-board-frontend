@@ -1,6 +1,7 @@
 import  { createContext, useContext, useEffect, useState } from 'react';
 import { userDetails } from '../api/User';
 import Loading from '../components/Loading/Loading';
+import { axiosSecure } from '../utils/axios';
 
 export const UserContext = createContext();
 
@@ -10,8 +11,12 @@ export const UserProvider = ({ children }) => {
 
   const fetchUserData = async () => {
     try {
+      setLoading(true);
+      console.log('Headers before request:', axiosSecure.defaults.headers);
       const currentUser = await userDetails();
-      setUser(currentUser.data.userData);
+      console.log('currentUser in context', currentUser.data.user)
+      console.log('Headers after request:', axiosSecure.defaults.headers);
+      setUser(currentUser.data.user);
     } catch (error) {
       console.error('Error fetching user data:', error);
     } finally {
@@ -22,10 +27,14 @@ export const UserProvider = ({ children }) => {
   const logOut = () => {
     setUser(null);
     localStorage.removeItem('token');
+    axiosSecure.defaults.headers['Authorization'] = undefined;
   };
 
 
   useEffect(() => {
+    // Ensure Token Inclusion
+    const token = localStorage.getItem('token');
+    axiosSecure.defaults.headers['Authorization'] = token ? `Bearer ${token}` : undefined;
     fetchUserData();
   }, []);
 

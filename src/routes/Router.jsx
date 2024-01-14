@@ -9,6 +9,9 @@ import TabContent from "../components/TabContent/TabContent";
 import Bugs from "../components/Bugs/Bugs";
 import DatabaseRequest from "../components/DatabaseRequest/DatabaseRequest";
 import SingleFeatures from "../components/FeatureRequests/SingleFeatures";
+import PrivateLayout from "../components/layout/PrivateLayout";
+import Dashboard from "../components/layout/Dashboard";
+import AllUsers from "../pages/Dashboard/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -66,6 +69,16 @@ export const router = createBrowserRouter([
         <DatabaseRequest />
       </OpenLayout>
     ),
+  },
+  {
+    path:'/dashboard',
+    element:<PrivateLayout><Dashboard></Dashboard></PrivateLayout>,
+    children:[
+      {
+        path:'allusers',
+        element:<AllUsers></AllUsers>
+      }
+    ]
   },
 
   {

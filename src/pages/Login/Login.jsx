@@ -20,11 +20,13 @@ const Login = () => {
     try {
       setLoading(true);
       const response = await loginUser(userData);
+
       if (response && response.data) {
         setUser(response.data)
         reset();
         navigate("/");
-        toast.success("Login Successfully");
+        window.location.reload();
+        // toast.success("Login Successfully");
       } else if (response && response.message) {
         console.log('unexpected error from server', response)
         toast.error("User not found. Please check your email and password.");
