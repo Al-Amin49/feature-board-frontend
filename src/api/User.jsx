@@ -41,3 +41,13 @@ export const userDetails=async()=>{
     throw new error();
   }
 }
+
+export const getAllUsers=async()=>{
+  try{
+    const response= await axiosSecure.get('api/v1/users/allusers');
+    return response.data;
+  }
+  catch(error){
+    console.log(error)
+  }
+}

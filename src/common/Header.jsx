@@ -96,8 +96,8 @@ const Header = () => {
               {navItem}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl">
-            Feature Board
+          <Link to="/" className="btn btn-ghost text-2xl text-fuchsia-500">
+            CollaboBoard
           </Link>
         </div>
         <div className="navbar-end hidden lg:flex">
