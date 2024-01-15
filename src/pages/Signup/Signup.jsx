@@ -5,8 +5,11 @@ import { toast } from "react-toastify";
 import { signUpUser } from "../../api/User";
 import Loading from "../../components/Loading/Loading";
 import { useAuth } from "../../context/UserProvider";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 const Signup = () => {
-  const {setUser, loading, setLoading}= useAuth()
+  const {setUser, loading, setLoading}= useAuth();
+  const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate();
   const {
     register,
@@ -28,6 +31,7 @@ const Signup = () => {
         setUser(response.data)
         reset();
         navigate("/");
+        window.location.reload()
         toast.success("Register Successfully", {
           position: "top-center",
         });
@@ -98,7 +102,7 @@ const Signup = () => {
                   <span className="label-text">Password*</span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? 'text' :'password'}
                   placeholder="password"
                   {...register("password", {
                     required: true,
@@ -107,6 +111,13 @@ const Signup = () => {
                   })}
                   className="input input-bordered"
                 />
+                   <button
+                  type="button"
+                  className="absolute  top-[66%] right-10 transform -translate-y-1/2 focus:outline-none"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
                 {errors.password?.type === "required" && (
                   <span className="text-red-600">Password is required</span>
                 )}
@@ -120,6 +131,7 @@ const Signup = () => {
                     Password must be including one digit and one number
                   </span>
                 )}
+               
               </div>
               <div className="form-control mt-2 ">
                 <button className="btn btn-primary text-white w-1/2 mx-auto">

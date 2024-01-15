@@ -5,10 +5,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Loading from "../../components/Loading/Loading";
 import { useAuth } from "../../context/UserProvider";
+import { FaEyeSlash } from "react-icons/fa6";
+import { useState } from "react";
+import { FaEye } from "react-icons/fa";
 const Login = () => {
   const navigate = useNavigate();
   const { handleSubmit, reset, register } = useForm();
-
+  const [showPassword, setShowPassword] = useState(false)
   const {loading, setLoading, setUser} = useAuth();
 
   const onSubmit = async (data) => {
@@ -66,12 +69,19 @@ const Login = () => {
                   <span className="label-text">Password*</span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="password"
-                  className="input input-bordered"
+                  className="input input-bordered pr-12"
                   {...register("password")}
                   required
                 />
+                 <button
+                  type="button"
+                  className="absolute top-[58%] right-10 transform -translate-y-1/2 focus:outline-none"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
               </div>
               <div className="form-control mt-2 ">
                 <button className="btn btn-primary text-white w-1/2 mx-auto">
