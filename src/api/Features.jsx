@@ -102,3 +102,13 @@ export const getAllVoters = async (id) => {
     throw error.response?.data;
   }
 };
+
+export const getTotalVotesCount = async () => {
+  try {
+    const response = await axiosSecure.get("/api/v1/features/votes/count",);
+    return response;
+  } catch (error) {
+    console.error(error.response.data);
+    throw error.response?.data;
+  }
+};

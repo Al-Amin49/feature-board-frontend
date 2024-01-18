@@ -83,7 +83,7 @@ const Header = () => {
           Welcome, {user.username}
         </li>
       )}
-      <div className="dropdown dropdown-end">
+      { user &&<div className="dropdown dropdown-end">
         <div
           tabIndex={0}
           role="button"
@@ -109,7 +109,7 @@ const Header = () => {
             <Link onClick={handleLogout}>Logout</Link>
           </li>
         </ul>
-      </div>
+      </div>}
         </div>
       </div>
     </div>
