@@ -3,62 +3,33 @@ import { useAuth } from "../context/UserProvider";
 import Loading from "../components/Loading/Loading";
 
 const Header = () => {
-  const {user,loading, logOut}= useAuth();
-  const navigate=useNavigate();
+  const { user, loading, logOut } = useAuth();
+  const navigate = useNavigate();
   if (loading || user) {
-     <Loading />;
+    <Loading />;
   }
   const handleLogout = () => {
     logOut();
-    navigate('/')
+    navigate("/");
   };
-  const profile = (
-    <>
-    
-    {user && <li className="text-center flex flex-row items-center mx-2 ">Welcome, {user.username}</li>}
-     <div className="dropdown dropdown-end">
-     
-     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-     
-        <div className="w-8 rounded-full border-2 navbar-end">
-          
-          <img
-            alt="Tailwind CSS Navbar component"
-            src="https://static.vecteezy.com/system/resources/previews/020/911/740/original/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png"
-          />
-        
-        </div>
-       
-      </div>
-      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-28">
-        <li>
-          <Link to="/profile" className="justify-between">Profile</Link>
-        </li>
-        <li>
-          <Link onClick={handleLogout}>Logout</Link>
-        </li>
-      </ul>
-            </div>
-            
-    </>
-  );
+
 
   const navItem = (
     <>
+    <li>
+        <Link to="/">Home</Link>
+      </li>
       {user ? (
-         <>
-         {user.role === 'admin' && (
-           <li>
-             <Link to="/dashboard/adminHome">Dashboard</Link>
-           </li>
-         )}
-         {profile}
-       </>
+        <>
+          {user.role === "admin" && (
+            <li>
+              <Link to="/dashboard/adminHome">Dashboard</Link>
+            </li>
+          )}
+      
+        </>
       ) : (
         <>
-        <li>
-            <Link to="/">Home</Link>
-          </li>
           <li>
             <Link to="/login">Login</Link>
           </li>
@@ -67,7 +38,7 @@ const Header = () => {
           </li>
         </>
       )}
-     
+      
     </>
   );
 
@@ -92,7 +63,10 @@ const Header = () => {
                 />
               </svg>
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
               {navItem}
             </ul>
           </div>
@@ -100,11 +74,42 @@ const Header = () => {
             CollaboBoard
           </Link>
         </div>
-        <div className="navbar-end hidden lg:flex">
+        <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal -mr-56">{navItem}</ul>
         </div>
         <div className="navbar-end mr-8">
-       
+        {user && (
+        <li className="text-center flex flex-row items-center mx-2 ">
+          Welcome, {user.username}
+        </li>
+      )}
+      <div className="dropdown dropdown-end">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-ghost btn-circle avatar"
+        >
+          <div className="w-8 rounded-full border-2 navbar-end">
+            <img
+              alt="Tailwind CSS Navbar component"
+              src="https://static.vecteezy.com/system/resources/previews/020/911/740/original/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png"
+            />
+          </div>
+        </div>
+        <ul
+          tabIndex={0}
+          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-28 bg-warning"
+        >
+          <li>
+            <Link to="/profile" className="justify-between">
+              Profile
+            </Link>
+          </li>
+          <li>
+            <Link onClick={handleLogout}>Logout</Link>
+          </li>
+        </ul>
+      </div>
         </div>
       </div>
     </div>

@@ -111,7 +111,7 @@ const SingleFeatures = () => {
         <p className="text-gray-500">
           Created on: {new Date(singleFeature.createdAt).toLocaleString()}
         </p>
-        {user && (
+        {user &&  (
           <div className="flex items-center my-2">
             <div className="text-xl font-medium">
               <button
