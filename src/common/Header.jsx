@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/UserProvider";
 import Loading from "../components/Loading/Loading";
-
+import logo from '../assets/img/featureBoard.png'
 const Header = () => {
   const { user, loading, logOut } = useAuth();
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className="navbar bg-primary ">
+      <div className="navbar bg-primary text-gray-800 font-sens font-medium">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -71,7 +71,7 @@ const Header = () => {
             </ul>
           </div>
           <Link to="/" className="btn btn-ghost text-2xl text-fuchsia-500">
-            CollaboBoard
+           <img src={logo} className="w-24 absolute left-20 " alt="" />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">

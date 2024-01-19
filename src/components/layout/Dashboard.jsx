@@ -1,6 +1,6 @@
 import { FaHome, FaUsers } from "react-icons/fa";
-import {  NavLink, Outlet } from "react-router-dom";
-
+import {  Link, NavLink, Outlet } from "react-router-dom";
+import logo from '../../assets/img/featureBoard.png';
 const Dashboard = () => {
   return (
     <div>
@@ -8,7 +8,9 @@ const Dashboard = () => {
       <div className="flex">
         {/* dashboard side bar */}
         <div className="w-64 min-h-screen bg-orange-400">
-          <h3 className="text-3xl text-center text-fuchsia-500 pt-4">CollaboBoard</h3>
+          <h3 className="text-3xl flex flex-col justify-center items-center text-fuchsia-500 pt-4">
+            <Link to="/"><img src={logo} className="w-24" alt="" /></Link>
+          </h3>
           <ul className="menu p-4">
          
             <li>
