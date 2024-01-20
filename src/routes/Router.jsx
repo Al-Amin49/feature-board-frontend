@@ -14,6 +14,7 @@ import Dashboard from "../components/layout/Dashboard";
 import AllUsers from "../pages/Dashboard/AllUsers";
 import AdminHome from "../pages/Dashboard/AdminHome";
 import Features from "../pages/Dashboard/Features";
+import AdminInfo from "../components/AdminInfo";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup></Signup>,
+      },
+      {
+        path: "/adminInfo",
+        element: <AdminInfo></AdminInfo>,
       },
      
      

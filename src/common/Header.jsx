@@ -36,6 +36,9 @@ const Header = () => {
           <li>
             <Link to="/signup">Signup</Link>
           </li>
+          <li>
+            <Link to="/adminInfo">AdminInfo</Link>
+          </li>
         </>
       )}
       
