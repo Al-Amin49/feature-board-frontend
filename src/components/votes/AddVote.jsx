@@ -12,6 +12,10 @@ const AddVote = ({feature,setFeatures}) => {
     const handleVote = async (event, featureId) => {
         try {
           event.preventDefault();
+          if(!user){
+        navigate('/login')
+        return;
+          }
           setLoading(true);
           
          
@@ -21,28 +25,26 @@ const AddVote = ({feature,setFeatures}) => {
           // Update the features after voting
           // Fetch the updated features from the server
           const updatedFeatures = await fetchUpdatedFeatures();
+          console.log('Updated features after voting:', updatedFeatures);
     
           // Set the updated features in the state
           setFeatures(updatedFeatures);
           
     
           // Check if the user is authenticated
-          if (user) {
+          if (user && user._id) {
             // Check if the user has already voted or unvoted
             const hasVoted = updatedFeatures
-            .find((feature) => feature._id === featureId)
-            ?.votes.some((vote) => vote?.toString() === user._id.toString());
-    
+              .find((feature) => feature._id === featureId)
+              ?.votes.some((vote) => vote?.toString() === user._id.toString());
+      
             // Show a toast message based on the voting status
             if (hasVoted) {
               toast.success("Vote added successfully");
-            } 
-          } else {
-            
-              navigate("/login"); 
-              return;
-            
-          }
+            } else {
+              toast.success("Vote removed successfully");
+            }
+          } 
         } catch (error) {
             console.error("Error voting:", error);
             console.log("Full error object:", error);

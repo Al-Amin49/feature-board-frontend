@@ -81,9 +81,12 @@ export const sortFeatures = async (sortOption) => {
   };
 
 // add Vote for a feature by ID
+// add Vote for a feature by ID
 export const voteFeature = async (id) => {
   try {
+    console.log(`Attempting to vote for feature with ID: ${id}`);
     const response = await axiosSecure.post(`/api/v1/features/${id}/vote`);
+    console.log('Vote successful. Response:', response);
     return response;
   } catch (error) {
     console.error("Error in voteFeature API call:", error);

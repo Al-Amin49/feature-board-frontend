@@ -70,8 +70,8 @@ const Header = () => {
               {navItem}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-2xl text-fuchsia-500">
-           <img src={logo} className="w-24 absolute left-20 " alt="" />
+          <Link to="/" >
+           <img src={logo} className="w-24 absolute left-20  top-0" alt="" />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
