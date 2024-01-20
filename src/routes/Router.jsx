@@ -13,6 +13,7 @@ import PrivateLayout from "../components/layout/PrivateLayout";
 import Dashboard from "../components/layout/Dashboard";
 import AllUsers from "../pages/Dashboard/AllUsers";
 import AdminHome from "../pages/Dashboard/AdminHome";
+import Features from "../pages/Dashboard/Features";
 
 export const router = createBrowserRouter([
   {
@@ -82,7 +83,11 @@ export const router = createBrowserRouter([
       {
         path:'adminHome',
         element:<AdminHome></AdminHome>
-      }
+      },
+      {
+        path:'features',
+        element:<Features></Features>
+      },
     ]
   },
 

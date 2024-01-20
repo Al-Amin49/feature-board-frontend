@@ -25,6 +25,12 @@ const Dashboard = () => {
                 All Users
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/dashboard/features">
+               
+                Features
+              </NavLink>
+            </li>
 
             {/* shared nav links */}
             <div className="divider"></div>
