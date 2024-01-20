@@ -48,7 +48,7 @@ const SingleFeatures = () => {
 
       // Update the local state with the updated feature
       setSingleFeature(updatedFeature.data);
-      toast.success(`${singleFeature.title} updated successfully`);
+      toast.success(`Feature updated successfully`);
       // Close the modal
       document.getElementById("edit_modal").close();
     } catch (error) {
@@ -65,7 +65,7 @@ const SingleFeatures = () => {
       if (confirmDelete) {
         await deleteFeature(id);
         // Redirect or navigate to the feature list page after deletion
-        navigate("/feedback/feature-requests");
+        navigate("/");
       }
     } catch (error) {
       console.error("Error deleting feature:", error);
@@ -104,15 +104,17 @@ const SingleFeatures = () => {
             Title: {singleFeature.title}
           </h2>
         </div>
-        <h3 className="text-xl font-medium">Name: {singleFeature.user} </h3>
+        <h3 className="text-xl font-medium">Name: {singleFeature.user?.username || 'Unknown User'} </h3>
+        {console.log('Single feature', singleFeature)}
 
         <p>Description: {singleFeature.description}</p>
-
+       
         <p className="text-gray-500">
           Created on: {new Date(singleFeature.createdAt).toLocaleString()}
         </p>
-        {user &&  (
-          <div className="flex items-center my-2">
+        {user &&singleFeature.user && user._id===singleFeature.user._id && (
+         
+          <div className="flex items-center my-2 text-center ">
             <div className="text-xl font-medium">
               <button
                 className="btn"
@@ -123,9 +125,9 @@ const SingleFeatures = () => {
                 <FaEdit />
               </button>
               <dialog id="edit_modal" className="modal">
-                <div className="modal-box">
-                  <h3 className="font-bold text-lg">Edit Feature</h3>
-                  <label className="block text-sm font-medium text-gray-700">
+                <div className="modal-box bg-secondary">
+                  <h3 className="font-bold text-lg pb-4">Edit Feature</h3>
+                  <label className="block  text-xl font-bold text-gray-700">
                     Title
                   </label>
                   <input
@@ -134,7 +136,7 @@ const SingleFeatures = () => {
                     value={editTitle}
                     onChange={(e) => setEditTitle(e.target.value)}
                   />
-                  <label className="block text-sm font-medium text-gray-700 mt-4">
+                  <label className="block text-xl font-bold text-gray-700 mt-4">
                     Description
                   </label>
                   <textarea
@@ -143,11 +145,11 @@ const SingleFeatures = () => {
                     onChange={(e) => setEditDescription(e.target.value)}
                   ></textarea>
                   <div className="mt-4 flex justify-end">
-                    <button className="btn" onClick={handleEditFeature}>
+                    <button className="btn btn-primary" onClick={handleEditFeature}>
                       Save
                     </button>
                     <button
-                      className="btn ml-2"
+                      className="btn ml-2 btn-primary"
                       onClick={() =>
                         document.getElementById("edit_modal").close()
                       }
