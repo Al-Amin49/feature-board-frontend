@@ -3,6 +3,7 @@ import { deleteFeature, getAllFeatures, updateFeatureStatus } from "../../api/Fe
 import { FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import Loading from "../../components/Loading/Loading";
 
 const Features = () => {
   const [loading, setLoading] = useState(true);
@@ -11,6 +12,7 @@ const Features = () => {
   const [totalPages, setTotalPages] = useState(1);
   const fetchAllFeatures = async (newPage) => {
     try {
+        setLoading(true)
       const response = await getAllFeatures({ page: newPage });
       setFeatures(response.data.features);
       setTotalPages(response.data.totalPages);
@@ -32,23 +34,25 @@ const Features = () => {
     fetchAllFeatures(currentPage);
   }, [currentPage]);
 
-  const handleUpdateStatus = async (feature) => {
+  const handleUpdateStatus = async (feature, status) => {
     try {
       if (!feature.status) {
         console.log("Please select a new status");
-        return;
+        // return;
       }
-
+      console.log('status', status)
+     
       const updatedData = {
-        status: feature.status,
+        status
       };
-
+      console.log("Updating status with data:", updatedData);
       // Assuming feature._id is the ID of the feature you want to update
-      const response = await updateFeatureStatus(feature._id, updatedData);
+      const response = await updateFeatureStatus(feature, updatedData);
       console.log("update status", response);
 
       // Assuming your API returns the updated feature
       const updatedFeature = response.data;
+      console.log('updated feature', updatedFeature)
       toast.success("Update status successfully");
 
       // Update the state with the updated feature
@@ -96,13 +100,15 @@ const Features = () => {
   };
   return (
     <div>
-      <h3>features {features.length}</h3>
+        {loading ? <Loading/> : 
+        <>
+      
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           {/* head */}
           <thead>
             <tr>
-              <th></th>
+              {/* <th></th> */}
               <th>Title</th>
               <th>Request time</th>
               <th>Update Status</th>
@@ -110,9 +116,10 @@ const Features = () => {
             </tr>
           </thead>
           <tbody>
-            {features.map((feature, index) => (
+            {features.map((feature) => (
+                // const rowNumber = (currentPage - 1) * features.length + index + 1;
               <tr key={feature._id}>
-                <th>{index + 1}</th>
+                {/* <th>{index+1}</th> */}
                 <td>{feature.title}</td>
                 <td>{new Date(feature.createdAt).toLocaleString()}</td>
                 <td>
@@ -142,7 +149,7 @@ const Features = () => {
                     <option value="Archived">Archived</option>
                   </select>
                   <button
-                    onClick={() => handleUpdateStatus(feature._id)}
+                    onClick={() => handleUpdateStatus(feature._id, feature.status)}
                     className="btn btn-lg bg-orange-500"
                   >
                     Update Status
@@ -181,6 +188,8 @@ const Features = () => {
           Next
         </button>
       </div>
+        </>
+        }
     </div>
   );
 };
