@@ -1,6 +1,7 @@
-#feature-board
+# Introduction
+ Feature Board project, a dynamic platform designed to streamline feature requests and enhance collaboration between users and administrators. The Feature Board serves as a central hub for users to propose, discuss, and vote on new features, allowing the community to actively contribute to the evolution of our product.
 
-Live Site: https://feature-board1.netlify.app/
+**Live Site:** https://feature-board1.netlify.app/
 
 ### Features
 - **User Authentication :** Secure user authentication to ensure that only authorized users can submit features and access the admin portal.
