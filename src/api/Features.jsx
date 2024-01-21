@@ -115,3 +115,14 @@ export const getTotalVotesCount = async () => {
     throw error.response?.data;
   }
 };
+
+export const updateFeatureStatus=async(id, updatedData)=>{
+  try {
+    const response = await axiosSecure.put(`/api/v1/features/${id}`, updatedData);
+    console.log('update api status', response)
+    return response;
+  } catch (error) {
+    console.error(error.response.data);
+    throw error.response?.data;
+  }
+}

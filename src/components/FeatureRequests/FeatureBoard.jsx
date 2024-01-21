@@ -16,9 +16,7 @@ const FeatureBoard = ({ features, setFeatures }) => {
 
   const fetchData = async (newPage) => {
     try {
-      console.log('Fetching data for page', newPage);
       const response = await getAllFeatures({ page:  newPage});
-      console.log('response', response)
       setFeatures(response.data.features);
       setTotalPages(response.data.totalPages);
     } catch (error) {
@@ -168,6 +166,7 @@ const FeatureBoard = ({ features, setFeatures }) => {
                         <p className="text-accent my-2">
                           {feature.description}
                         </p>
+                        <p className="text-xl text-warning p-2 font-bold rounded">{feature.status}</p>
                         <p className="flex items-center ">
                           <span className="mr-1">
                             <FaRegCommentAlt />{" "}

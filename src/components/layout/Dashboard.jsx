@@ -27,8 +27,7 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink to="/dashboard/features">
-               
-                Features
+                Manage Feature Board
               </NavLink>
             </li>
 
