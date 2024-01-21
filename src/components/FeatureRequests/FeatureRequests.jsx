@@ -85,7 +85,7 @@ const FeatureRequests = () => {
                         Details
                       </span>
                     </label>
-                    <input
+                    <textarea
                       type="text"
                       placeholder="Any additional details"
                       className="input input-bordered input-secondary"

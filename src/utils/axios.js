@@ -18,4 +18,4 @@ export const axiosSecure=axios.create({
     Authorization: `Bearer ${localStorage.getItem("token")}`,
   },
 }) 
-console.log('Headers in axiosSecure:', axiosSecure.defaults.headers);
+// console.log('Headers in axiosSecure:', axiosSecure.defaults.headers);
