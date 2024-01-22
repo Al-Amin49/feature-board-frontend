@@ -14,6 +14,7 @@
 - **Admin Portal**
     - **User Management** Admin cand Delete User, Admin also can make admin any user
     - **Admin Home** In admin home will show overview of feature board.
+    - **Manage Feature board** Where admin can change the status of the feature and also can delete the feature
 ### Technologies and Packages
 **Technologies**
 - Tailwind CSS
@@ -31,6 +32,7 @@
 
 ### Code Link
 Client side: https://github.com/Al-Amin49/feature-board-frontend
+
 Server side: https://github.com/Al-Amin49/feature-board-backend
 
 ### Installation and Usage
