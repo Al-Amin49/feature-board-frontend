@@ -35,6 +35,15 @@ export const getAllFeatures = async (params) => {
       throw error.response?.data;
     }
   };
+export const getAllFeaturesForHome = async () => {
+    try {
+      const response = await axiosOpen.get('api/v1/features/feature-home');
+      return response;
+    } catch (error) {
+      console.error(error.response.data);
+      throw error.response?.data;
+    }
+  };
 
   // Edit feature by ID
 export const editFeature = async (id, updatedData) => {
@@ -80,7 +89,7 @@ export const sortFeatures = async (sortOption) => {
     }
   };
 
-// add Vote for a feature by ID
+
 // add Vote for a feature by ID
 export const voteFeature = async (id) => {
   try {
@@ -126,3 +135,13 @@ export const updateFeatureStatus=async(id, updatedData)=>{
     throw error.response?.data;
   }
 }
+
+export const getFeatureWithVotes = async (id) => {
+  try {
+    const response = await axiosSecure.get(`/api/v1/features/${id}/feature-with-votes}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

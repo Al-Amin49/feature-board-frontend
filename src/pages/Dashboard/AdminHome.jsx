@@ -3,7 +3,7 @@ import { FaUsers } from "react-icons/fa6";
 import { useAuth } from "../../context/UserProvider";
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../api/User";
-import { getAllFeatures, getTotalVotesCount } from "../../api/Features";
+import { getAllFeaturesForHome, getTotalVotesCount } from "../../api/Features";
 import { getTotalCommentsCount } from "../../api/Comments";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
 const AdminHome = () => {
@@ -23,7 +23,8 @@ const AdminHome = () => {
   };
   const fetchAllFeatures = async () => {
     try {
-      const features = await getAllFeatures();
+      const features = await getAllFeaturesForHome();
+      console.log('features home', features)
       setTotalFeatures(features.data.features.length); 
     } catch (error) {
       console.error("Error fetching users:", error);

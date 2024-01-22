@@ -10,6 +10,7 @@ const Features = () => {
   const [features, setFeatures] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  
   const fetchAllFeatures = async (newPage) => {
     try {
         setLoading(true)
@@ -98,11 +99,12 @@ const Features = () => {
       });
     }
   };
+
   return (
     <div>
         {loading ? <Loading/> : 
         <>
-      
+     
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           {/* head */}
@@ -111,6 +113,8 @@ const Features = () => {
               {/* <th></th> */}
               <th>Title</th>
               <th>Request time</th>
+              <th>Votes</th>
+              <th>Comments</th>
               <th>Update Status</th>
               <th>Delete</th>
             </tr>
@@ -122,6 +126,8 @@ const Features = () => {
                 {/* <th>{index+1}</th> */}
                 <td>{feature.title}</td>
                 <td>{new Date(feature.createdAt).toLocaleString()}</td>
+                <td>{feature.votes.length}</td>
+                <td>{feature.comments.length}</td>
                 <td>
                   <select
                     value={feature.status || ""}
