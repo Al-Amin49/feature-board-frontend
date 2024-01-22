@@ -7,6 +7,7 @@
 - **User Authentication :** Secure user authentication to ensure that only authorized users can submit features and access the admin portal.
 - **Feture Submission :** Allow users to submit new feature requests with detailed descriptions and they cand edit and delete feature also.
 - **Voting System :** Enable users to vote on their favorite features, providing valuable feedback
+- **Commenting System:** User can add comment and see comment
 - **Sorting Option :** Created a different type of sorting option
 - **Search option:** Authneticated user can search based on title and description
 - **Pagination :** Pagination created for feature board
